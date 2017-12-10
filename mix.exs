@@ -22,9 +22,10 @@ defmodule Antidote.Mixfile do
   defp deps do
     [
       {:decimal, "~> 1.0", optional: true},
-      {:benchee, "~> 0.8", only: :dev},
+      {:benchee, "~> 0.8", only: :dev, override: true},
       {:benchee_html, "~> 0.1", only: :dev},
-      {:poison, "~> 3.0", only: :dev},
+      {:benchee_json, "~> 0.4.0", only: :dev},
+      {:poison, "~> 3.0", only: :dev, override: true},
       {:exjsx, "~> 4.0", only: :dev},
       {:tiny, "~> 1.0", only: :dev},
       {:jsone, "~> 1.4", only: :dev},

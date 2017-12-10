@@ -31,6 +31,9 @@ read_data = fn (name) ->
   |> File.read!
 end
 
+path = System.get_env("BENCHMARKS_OUTPUT_PATH") || raise "I DON'T KNOW WHERE TO WRITE!!!"
+file = Path.join(path, "decode.json")
+
 Benchee.run(decode_jobs,
   parallel: 4,
   # warmup: 5,
@@ -41,12 +44,11 @@ Benchee.run(decode_jobs,
     |> (&{name, &1}).()
   end,
   formatters: [
-    &Benchee.Formatters.HTML.output/1,
-    &Benchee.Formatters.Console.output/1,
+    Benchee.Formatters.JSON
   ],
   formatter_options: [
-    html: [
-      file: Path.expand("output/decode.html", __DIR__)
+    json: [
+      file: file
     ]
   ]
 )
